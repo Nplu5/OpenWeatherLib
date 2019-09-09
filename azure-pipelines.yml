@@ -8,4 +8,21 @@ trigger:
 - build-pipeline
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
+
+steps:
+- script: dotnet restore
+
+- tasks: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: build
+    projects: '**/*.csproj'
+    arguments: '--configuration Release'
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: '**/*.csproj'
+    arguments: '--configuration Release'
