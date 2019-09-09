@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.2.0</Version>
+    <Authors>Simon Krause</Authors>
+    <RepositoryUrl>https://github.com/Nplu5/OpenWeatherLib</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>OpenWeather, Forecast, Weather</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
