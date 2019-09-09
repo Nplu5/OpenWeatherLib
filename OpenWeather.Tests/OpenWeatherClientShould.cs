@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Net;
 using System.Linq;
-using WeatherNotifier.Shared.Models;
+using OpenWeather.Models;
 using OpenWeather.Interfaces;
 
 namespace OpenWeather.Tests

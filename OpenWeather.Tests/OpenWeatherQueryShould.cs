@@ -6,7 +6,7 @@ using Xunit;
 using Moq;
 
 using OpenWeather.Interfaces;
-using WeatherNotifier.Shared.Models;
+using OpenWeather.Models;
 
 namespace OpenWeather.Tests
 {

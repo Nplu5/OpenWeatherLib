@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OpenWeather.Tests
+﻿namespace OpenWeather.Tests
 {
     internal class TestData
     {
