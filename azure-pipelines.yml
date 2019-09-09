@@ -27,7 +27,7 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration Release'
 
-- script: dotnet test OpenWeather.Tests/*.csproj --logger trx --collect "Code coverage"
+- script: dotnet test OpenWeather.Tests/OpenWeather.Tests.csproj --logger trx --collect "Code coverage"
 - task: PublishTestResults@2
   displayName: Publish test results
   condition: succeededOrFailed()
