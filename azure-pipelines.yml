@@ -15,6 +15,9 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+variables:
+  buildConfiguration: 'Release'
+
 steps:
 - task: DotNetCoreCLI@2
   displayName: Restore NuGet packages for lib
@@ -33,18 +36,38 @@ steps:
   inputs:
     command: build
     projects: 'OpenWeather/*.csproj'
-    arguments: '--configuration Release'
+    arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: Build test project
   inputs:
     command: build
     projects: 'OpenWeather.Tests/*.csproj'
-    arguments: '--configuration Release'
+    arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: Run test project
   inputs:
     command: test
     projects: 'OpenWeather.Tests/*.csproj'
-    arguments: '--configuration Release --collect "Code coverage"'
+    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+
+- task: DottNetCoreCLI@2
+  displayName: Package library 
+  inputs:
+    command: pack
+    arguments: '--configuration $(buildConfiguration)'
+    packagesToPack: 'OpenWeather/*.csproj'
+    nobuild: true
+    versioningSCheme: 'off'
+
+- task: NuGetCommand@2
+  displayName: 'nuget push'
+  inputs:
+    command: 'push'
+    feedsToUse: 'select'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: 'OpenWeather.InternalFeed'
+    versioningScheme: 'off'
+    allowPackageConflicts: true

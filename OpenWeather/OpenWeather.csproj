@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Nplus.OpenWeatherApi</PackageId>
+    <Description>A library to interact with the OpenWeather API</Description>
+    <IsPackable>true</IsPackable>
     <Version>0.3.0</Version>
     <Authors>Simon Krause</Authors>
     <RepositoryUrl>https://github.com/Nplu5/OpenWeatherLib</RepositoryUrl>
