@@ -23,5 +23,24 @@ namespace OpenWeather.Models
                 ForecastData.Add(datum);
             }
         }
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            builder.Append(Location);
+            builder.AppendLine(":");
+
+            foreach(var datum in ForecastData)
+            {
+                builder.Append(datum.MeasureTime.ToLocalTime().ToString());
+                builder.Append(": ");
+                builder.Append($"{datum.Data.Temperature}");
+                builder.AppendLine("°C");
+                builder.AppendLine("------------------------");
+            }
+
+
+            return builder.ToString();
+        }
     }
 }

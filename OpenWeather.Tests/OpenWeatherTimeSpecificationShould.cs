@@ -60,7 +60,7 @@ namespace OpenWeather.Tests
             // 31.07.2019 00:00
             return ForecastResponse.FromJson(TestData.Forecast).Forecasts.Where(forecast =>
             {
-                return forecast.TimeOffset.DateTime.Equals(new DateTime(2019, 7, 30, 21, 0, 0));
+                return forecast.MeasureTime.Equals(new DateTime(2019, 7, 30, 21, 0, 0));
             })
             .Single();
         }
@@ -69,7 +69,7 @@ namespace OpenWeather.Tests
         public void ReturnTrueIfTimeDifferenceIsInRange()
         {
             var relativeDay = RelativeDay.NextDay;
-            var timeSpan = new TimeSpan(20, 30, 0);
+            var timeSpan = new TimeSpan(22, 30, 0);
             var referenceDateTime = new DateTime(2019, 07, 29, 18, 30, 34);
             var testForecast = GetTestForecast();
 

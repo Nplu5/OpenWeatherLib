@@ -7,7 +7,6 @@ using Moq;
 using OpenWeather.Interfaces;
 using OpenWeather.Models;
 using static OpenWeather.OpenWeatherUrlProvider;
-using Moq.Language.Flow;
 using Moq.Language;
 
 namespace OpenWeather.Tests
@@ -20,11 +19,11 @@ namespace OpenWeather.Tests
         private Mock<IUrlProvider> CreateFluentUrlProvider(string ReturnUrl = null)
         {
             var urlBuilder = new Mock<IUrlProvider>();
-            urlBuilder.Setup(builder => builder.SetLanguage(It.IsAny<OpenWeatherUrlProvider.QueryLanguage>()))
+            urlBuilder.Setup(builder => builder.SetLanguage(It.IsAny<QueryLanguage>()))
                 .Returns(() => urlBuilder.Object);
-            urlBuilder.Setup(builder => builder.SetMode(It.IsAny<OpenWeatherUrlProvider.QueryMode>()))
+            urlBuilder.Setup(builder => builder.SetMode(It.IsAny<QueryMode>()))
                 .Returns(() => urlBuilder.Object);
-            urlBuilder.Setup(builder => builder.SetUnit(It.IsAny<OpenWeatherUrlProvider.QueryUnit>()))
+            urlBuilder.Setup(builder => builder.SetUnit(It.IsAny<QueryUnit>()))
                 .Returns(() => urlBuilder.Object);
             urlBuilder.Setup(builder => builder.SetLocation(It.IsAny<string>()))
                 .Returns(() => urlBuilder.Object);
@@ -164,7 +163,7 @@ namespace OpenWeather.Tests
             var client = CreateClient(new List<Helper.Maybe<ForecastResponse>>() { new Helper.Maybe<ForecastResponse>(ForecastResponse.FromJson(TestData.ForecastResponseKarlsruhe)) });
             var mockQuery = CreateQuery(location);
             mockQuery.Setup(query => query.IsSatisfiedBy(It.IsAny<Forecast>()))
-                .Returns((Forecast forecast) => forecast.TimeOffset.Equals(new DateTimeOffset(2019, 7, 30, 21, 0, 0, new TimeSpan())));
+                .Returns((Forecast forecast) => forecast.MeasureTime.Equals(new DateTime(2019, 7, 30, 21, 0, 0)));
 
             var serviceUnderTest = new OpenWeatherService(client.Object, urlBuilder.Object);
 
@@ -181,7 +180,7 @@ namespace OpenWeather.Tests
             var client = CreateClient(new List<Helper.Maybe<ForecastResponse>>() { new Helper.Maybe<ForecastResponse>(ForecastResponse.FromJson(TestData.ForecastResponseKarlsruhe)) });
             var mockQuery = CreateQuery(location);
             mockQuery.Setup(query => query.IsSatisfiedBy(It.IsAny<Forecast>()))
-                .Returns((Forecast forecast) => forecast.TimeOffset.Equals(new DateTimeOffset(2019, 7, 30, 21, 0, 0, new TimeSpan())));
+                .Returns((Forecast forecast) => forecast.MeasureTime.Equals(new DateTimeOffset(2019, 7, 30, 21, 0, 0, new TimeSpan())));
 
             var serviceUnderTest = new OpenWeatherService(client.Object, urlBuilder.Object);
 
@@ -217,8 +216,8 @@ namespace OpenWeather.Tests
             mockQuery.Setup(query => query.IsSatisfiedBy(It.IsAny<Forecast>()))
                 .Returns((Forecast forecast) =>
                 {
-                    return forecast.TimeOffset.Equals(new DateTimeOffset(2019, 7, 30, 21, 0, 0, new TimeSpan()))
-                        || forecast.TimeOffset.Equals(new DateTimeOffset(2019, 7, 30, 18, 0, 0, new TimeSpan()));
+                    return forecast.MeasureTime.Equals(new DateTime(2019, 7, 30, 21, 0, 0))
+                        || forecast.MeasureTime.Equals(new DateTime(2019, 7, 31, 9, 0, 0));
                 });
 
             var serviceUnderTest = new OpenWeatherService(client.Object, urlBuilder.Object);
@@ -241,7 +240,7 @@ namespace OpenWeather.Tests
             });
             var mockQuery = CreateQuery(new List<string>() { firstLocation, secondLocation });
             mockQuery.Setup(query => query.IsSatisfiedBy(It.IsAny<Forecast>()))
-                .Returns((Forecast forecast) =>forecast.TimeOffset.Equals(new DateTimeOffset(2019, 7, 30, 21, 0, 0, new TimeSpan())));
+                .Returns((Forecast forecast) =>forecast.MeasureTime.Equals(new DateTime(2019, 7, 30, 21, 0, 0)));
 
             var serviceUnderTest = new OpenWeatherService(client.Object, urlBuilder.Object);
 
