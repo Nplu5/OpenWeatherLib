@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WeatherNotifier.Shared.Models;
+using OpenWeather.Models;
 using Xunit;
 
 namespace OpenWeather.Tests
