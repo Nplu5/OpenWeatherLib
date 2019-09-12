@@ -10,7 +10,6 @@ namespace OpenWeather
     {
         private const string LocationQueryParameterIdentifier = "q=";
 
-        // TODO: Make Set Methods check for existance of parameter and replace it
         readonly UriBuilder _builder;
 
         internal OpenWeatherUrlProvider(string BaseUrl, string ApiKey)

@@ -23,6 +23,6 @@ namespace OpenWeather.Models
         public long Population { get; set; }
 
         [JsonProperty("timezone")]
-        public long Timezone { get; set; } // Shift in Seconds from UTC
+        public long Timezone { get; set; }
     }
 }

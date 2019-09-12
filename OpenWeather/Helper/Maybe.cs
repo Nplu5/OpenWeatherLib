@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace OpenWeather.Helper
 {
     // Implemented after: http://codinghelmet.com/articles/avoid-returning-null 
-    public class Maybe<T> : IEnumerable<T>
+    internal class Maybe<T> : IEnumerable<T>
     {
         private readonly IEnumerable<T> _values;
 
