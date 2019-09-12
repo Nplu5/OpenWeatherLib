@@ -4,29 +4,47 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
-- build-pipeline
+  branches:
+    include:
+    - master
+    - build-pipeline
+  paths:
+    include:
+    - OpenWeather/*
 
 pool:
   vmImage: 'windows-latest'
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: Restore NuGet packages
+  displayName: Restore NuGet packages for lib
   inputs:
     command: restore
-    projects: '**/*.csproj'
+    projects: 'OpenWeather/*.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: Build projects
+  displayName: Restore NuGet packages for tests
+  inputs:
+    command: restore
+    projects: 'OpenWeather.Tests/*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: Build library project
   inputs:
     command: build
-    projects: '**/*.csproj'
+    projects: 'OpenWeather/*.csproj'
+    arguments: '--configuration Release'
+
+- task: DotNetCoreCLI@2
+  displayName: Build test project
+  inputs:
+    command: build
+    projects: 'OpenWeather.Tests/*.csproj'
     arguments: '--configuration Release'
 
 - task: DotNetCoreCLI@2
   displayName: Run test project
   inputs:
     command: test
-    projects: '**/*.csproj'
+    projects: 'OpenWeather.Tests/*.csproj'
     arguments: '--configuration Release --collect "Code coverage"'
