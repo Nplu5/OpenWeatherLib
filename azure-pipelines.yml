@@ -52,7 +52,7 @@ steps:
     projects: 'OpenWeather.Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
-- task: DottNetCoreCLI@2
+- task: DotNetCoreCLI@2
   displayName: Package library 
   inputs:
     command: pack
