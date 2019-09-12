@@ -2,7 +2,7 @@
 
 namespace OpenWeather.Interfaces
 {
-    public interface IQuery<T1,T2> : ISpecification<T2>
+    public interface IQuery<T1, T2> : ISpecification<T2>
     {
         IEnumerable<ISpecification<T2>> Specifications { get; }
         IEnumerable<T1> Queries { get; }

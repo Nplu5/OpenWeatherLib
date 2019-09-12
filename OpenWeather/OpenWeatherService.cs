@@ -1,8 +1,8 @@
-﻿using OpenWeather.Interfaces;
-using OpenWeather.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OpenWeather.Interfaces;
+using OpenWeather.Models;
 
 namespace OpenWeather
 {

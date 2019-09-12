@@ -1,6 +1,6 @@
-﻿using OpenWeather.Helper;
+﻿using System.Threading.Tasks;
+using OpenWeather.Helper;
 using OpenWeather.Models;
-using System.Threading.Tasks;
 
 namespace OpenWeather.Interfaces
 {

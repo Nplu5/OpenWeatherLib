@@ -1,5 +1,5 @@
-﻿using OpenWeather.Interfaces;
-using System;
+﻿using System;
+using OpenWeather.Interfaces;
 using Xunit;
 
 namespace OpenWeather.Tests
@@ -30,7 +30,7 @@ namespace OpenWeather.Tests
         {
             IUrlProvider ProviderUnderTest = CreateDefaultUrlProvider();
 
-            Assert.Contains("?APPID=",ProviderUnderTest.GetUriAsString());
+            Assert.Contains("?APPID=", ProviderUnderTest.GetUriAsString());
         }
 
         [Theory]
@@ -87,7 +87,7 @@ namespace OpenWeather.Tests
         {
             IUrlProvider ProviderUnderTest = CreateDefaultUrlProvider();
             ProviderUnderTest.SetUnit(UnitToSet);
-            
+
             if (ShouldContain)
             {
                 Assert.Contains(SearchString, ProviderUnderTest.GetUriAsString());
@@ -99,10 +99,10 @@ namespace OpenWeather.Tests
         }
 
         [Theory]
-        [InlineData("lang=de",OpenWeatherUrlProvider.QueryLanguage.German)]
-        [InlineData("lang=en",OpenWeatherUrlProvider.QueryLanguage.English)]
-        [InlineData("lang=fr",OpenWeatherUrlProvider.QueryLanguage.French)]
-        [InlineData("lang=tr",OpenWeatherUrlProvider.QueryLanguage.Turkish)]
+        [InlineData("lang=de", OpenWeatherUrlProvider.QueryLanguage.German)]
+        [InlineData("lang=en", OpenWeatherUrlProvider.QueryLanguage.English)]
+        [InlineData("lang=fr", OpenWeatherUrlProvider.QueryLanguage.French)]
+        [InlineData("lang=tr", OpenWeatherUrlProvider.QueryLanguage.Turkish)]
         internal void SetLanguageCorrectly(string SearchString, OpenWeatherUrlProvider.QueryLanguage LanguageToSet)
         {
             IUrlProvider ProviderUnderTest = CreateDefaultUrlProvider();
@@ -121,7 +121,7 @@ namespace OpenWeather.Tests
 
             IUrlProvider ProviderUnderTest = CreateDefaultUrlProvider();
             ProviderUnderTest.SetLocation(Town).SetMode(Mode).SetUnit(Unit).SetLanguage(Language);
-            
+
             Assert.True(true);
         }
 
@@ -153,7 +153,7 @@ namespace OpenWeather.Tests
             providerUnderTest.SetLocation(secondTown);
             var url = providerUnderTest.GetUriAsString();
 
-            Assert.Contains(string.Concat("q=",secondTown), url);
+            Assert.Contains(string.Concat("q=", secondTown), url);
             Assert.DoesNotContain(string.Concat("q=", firstTown), url);
             Assert.Contains("mode=json", url);
         }

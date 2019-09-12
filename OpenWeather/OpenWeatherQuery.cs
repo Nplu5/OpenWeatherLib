@@ -6,7 +6,7 @@ using OpenWeather.Models;
 
 namespace OpenWeather
 {
-    public class OpenWeatherQuery : IQuery<string,Forecast>
+    public class OpenWeatherQuery : IQuery<string, Forecast>
     {
         #region ctors
         public OpenWeatherQuery(string location, ISpecification<Forecast> spec)
@@ -15,7 +15,7 @@ namespace OpenWeather
             ValidateSpec(spec);
 
             Queries = new List<string>() { location };
-            Specifications = new List<ISpecification<Forecast>>() { spec };            
+            Specifications = new List<ISpecification<Forecast>>() { spec };
         }
         public OpenWeatherQuery(string location, IEnumerable<ISpecification<Forecast>> specs)
         {
@@ -43,7 +43,7 @@ namespace OpenWeather
         #region input Validation functions
         private void ValidateEnumerableInput<T>(IEnumerable<T> enumerable, Action<T> validateElementAction)
         {
-            if(enumerable is null)
+            if (enumerable is null)
                 throw new ArgumentNullException("Enumerable parameter must not be null");
 
             if (enumerable.Count() == 0)
@@ -72,7 +72,7 @@ namespace OpenWeather
         public IEnumerable<ISpecification<Forecast>> Specifications { get; }
         public IEnumerable<string> Queries { get; }
 
-        
+
         public bool IsSatisfiedBy(Forecast element)
         {
             return Specifications.Any(spec => spec.IsSatisfiedBy(element));

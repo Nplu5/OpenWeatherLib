@@ -34,7 +34,7 @@ namespace OpenWeather
                 referenceDateTime.Day,
                 timeSpan.Hours,
                 timeSpan.Minutes,
-                timeSpan.Seconds).AddDays((double)relativeDay);            
+                timeSpan.Seconds).AddDays((double)relativeDay);
         }
 
         private void ValidateTimeSpan(TimeSpan timeSpan)
