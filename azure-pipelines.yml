@@ -17,39 +17,42 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  testProject: 'OpenWeather.Tests/*.csproj'
+  libraryProject: 'OpenWeather/*.csproj'
 
 steps:
 - task: DotNetCoreCLI@2
   displayName: Restore NuGet packages for lib
   inputs:
     command: restore
-    projects: 'OpenWeather/*.csproj'
+    projects: '$(libraryProject)'
 
 - task: DotNetCoreCLI@2
   displayName: Restore NuGet packages for tests
   inputs:
     command: restore
-    projects: 'OpenWeather.Tests/*.csproj'
+    projects: '$(testProject)'
 
 - task: DotNetCoreCLI@2
   displayName: Build library project
   inputs:
     command: build
-    projects: 'OpenWeather/*.csproj'
+    projects: '$(libraryProject)'
     arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: Build test project
   inputs:
     command: build
-    projects: 'OpenWeather.Tests/*.csproj'
+    projects: '$(testProject)'
     arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: Run test project
   inputs:
     command: test
-    projects: 'OpenWeather.Tests/*.csproj'
+    nobuild: true
+    projects: '$(testProject)'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
 - task: DotNetCoreCLI@2
@@ -57,12 +60,12 @@ steps:
   inputs:
     command: pack
     arguments: '--configuration $(buildConfiguration)'
-    packagesToPack: 'OpenWeather/*.csproj'
+    packagesToPack: '$(libraryProject)'
     nobuild: true
     versioningSCheme: 'off'
 
 - task: NuGetCommand@2
-  displayName: 'nuget push'
+  displayName: 'Push Nuget to internal feed'
   inputs:
     command: 'push'
     feedsToUse: 'select'
