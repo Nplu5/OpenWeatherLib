@@ -15,7 +15,6 @@ namespace OpenWeather
 
         async Task<Maybe<ForecastResponse>> IClient.GetForecastAsync(string url)
         {
-            // TODO: make some of the object properties required
             try
             {
                 var response = await base.GetAsync(url);

@@ -16,8 +16,6 @@ namespace OpenWeather.Tests
     {
         // Testdata time range: 30.07.2019 21:00 - 04.08.2019 18:00
         // Testdata for following locations: Stuttgart, Karlsruhe
-        // TODO: Check if public interface can be extracted
-        // TODO: Models should only expose what is actually needed -> make most of it internal especially setters
 
         private Mock<IUrlProvider> CreateFluentUrlProvider(string ReturnUrl = null)
         {
