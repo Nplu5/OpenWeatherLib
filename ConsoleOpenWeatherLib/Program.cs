@@ -9,7 +9,7 @@ namespace ConsoleOpenWeatherLib
     {
         static async Task Main(string[] args)
         {
-            var openWeatherService = new OpenWeatherService("c9f817379c6fed669c718214bae83ab8");
+            var openWeatherService = OpenWeatherService.CreateOpenWeatherService("c9f817379c6fed669c718214bae83ab8");
             var query = new OpenWeatherQuery(
                 new List<string>()
                 {

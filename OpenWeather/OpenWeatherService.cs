@@ -6,14 +6,15 @@ using OpenWeather.Models;
 
 namespace OpenWeather
 {
-    public class OpenWeatherService
+    public class OpenWeatherService : IOpenWeatherService
     {
-        internal IClient Client { get; set; }
-        internal IUrlProvider UrlProvider { get; set; }
-        public OpenWeatherService(string ApiKey)
-            : this(new OpenWeatherClient(),
-                  new OpenWeatherUrlProvider("http://api.openweathermap.org/data/2.5/forecast", ApiKey))
-        { }
+        private IClient Client { get; set; }
+        private IUrlProvider UrlProvider { get; set; }
+        public static IOpenWeatherService CreateOpenWeatherService(string ApiKey)
+        {
+            return new OpenWeatherService(new OpenWeatherClient(), 
+                                          new OpenWeatherUrlProvider("http://api.openweathermap.org/data/2.5/forecast", ApiKey));
+        }
 
         internal OpenWeatherService(IClient client, IUrlProvider provider)
         {
