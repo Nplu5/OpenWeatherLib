@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using Xunit;
 using Moq;
-
 using OpenWeather.Interfaces;
 using OpenWeather.Models;
+using Xunit;
 
 namespace OpenWeather.Tests
 {
@@ -16,7 +14,7 @@ namespace OpenWeather.Tests
         public void TakeOneLocationAndOneSpecInCtorAndCheckForNullOfSpec()
         {
             string location = "Karlsruhe";
-            ISpecification<Forecast> spec= null;
+            ISpecification<Forecast> spec = null;
 
             Assert.Throws<ArgumentNullException>(() => new OpenWeatherQuery(location, spec));
         }
@@ -59,7 +57,7 @@ namespace OpenWeather.Tests
         {
             string location = "Karlsrueh";
             List<ISpecification<Forecast>> specs = null;
-            
+
             Assert.Throws<ArgumentNullException>(() => new OpenWeatherQuery(location, specs));
         }
 
@@ -88,7 +86,7 @@ namespace OpenWeather.Tests
         {
             string location = "Karlsruhe";
             List<ISpecification<Forecast>> specs = new List<ISpecification<Forecast>>();
-            foreach (int item in new List<int>{1, 2, 3})
+            foreach (int item in new List<int> { 1, 2, 3 })
             {
                 specs.Add(CreateSpecification(false));
             }
@@ -123,7 +121,7 @@ namespace OpenWeather.Tests
 
             Assert.False(QueryUnderTest.IsSatisfiedBy(elementToTest));
         }
-        
+
         [Fact]
         public void TakeEnumerableLocationsAndCheckForNullEnumerable()
         {
@@ -147,7 +145,7 @@ namespace OpenWeather.Tests
         [Fact]
         public void TakeEnumerableLocationsAndCheckForNullElements()
         {
-            List<string> locations = new List<string>() { null, "Karlsruhe"};
+            List<string> locations = new List<string>() { null, "Karlsruhe" };
             List<ISpecification<Forecast>> specs = new List<ISpecification<Forecast>>();
             specs.Add(CreateSpecification(false));
 

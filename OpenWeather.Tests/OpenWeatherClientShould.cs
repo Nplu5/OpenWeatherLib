@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using OpenWeather;
-using Moq.Protected;
-using Moq;
-using Xunit;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Net;
 using System.Linq;
-using OpenWeather.Models;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Moq;
+using Moq.Protected;
 using OpenWeather.Interfaces;
+using OpenWeather.Models;
+using Xunit;
 
 namespace OpenWeather.Tests
 {
@@ -33,7 +30,7 @@ namespace OpenWeather.Tests
 
             Assert.True(IsUrlForwarded);
         }
-        
+
         [Fact]
         public async Task ReturnForecastResponseObjectOnSuccessfullCall()
         {

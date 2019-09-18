@@ -4,29 +4,74 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
-- build-pipeline
+  branches:
+    include:
+    - master
+    - build-pipeline
+  paths:
+    include:
+    - azure-pipelines.yml
+    - OpenWeather/*
 
 pool:
   vmImage: 'windows-latest'
 
+variables:
+  buildConfiguration: 'Release'
+  testProject: 'OpenWeather.Tests/*.csproj'
+  libraryProject: 'OpenWeather/*.csproj'
+
 steps:
 - task: DotNetCoreCLI@2
-  displayName: Restore NuGet packages
+  displayName: Restore NuGet packages for lib
   inputs:
     command: restore
-    projects: '**/*.csproj'
+    projects: '$(libraryProject)'
 
 - task: DotNetCoreCLI@2
-  displayName: Build projects
+  displayName: Restore NuGet packages for tests
+  inputs:
+    command: restore
+    projects: '$(testProject)'
+
+- task: DotNetCoreCLI@2
+  displayName: Build library project
   inputs:
     command: build
-    projects: '**/*.csproj'
-    arguments: '--configuration Release'
+    projects: '$(libraryProject)'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Build test project
+  inputs:
+    command: build
+    projects: '$(testProject)'
+    arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: Run test project
   inputs:
     command: test
-    projects: '**/*.csproj'
-    arguments: '--configuration Release --collect "Code coverage"'
+    nobuild: true
+    projects: '$(testProject)'
+    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+
+- task: DotNetCoreCLI@2
+  displayName: Package library 
+  inputs:
+    command: pack
+    arguments: '--configuration $(buildConfiguration)'
+    packagesToPack: '$(libraryProject)'
+    nobuild: true
+    versioningSCheme: 'off'
+
+- task: NuGetCommand@2
+  displayName: 'Push Nuget to internal feed'
+  inputs:
+    command: 'push'
+    feedsToUse: 'select'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: 'OpenWeather.InternalFeed'
+    versioningScheme: 'off'
+    allowPackageConflicts: true

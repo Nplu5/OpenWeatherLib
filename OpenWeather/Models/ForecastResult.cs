@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 
 namespace OpenWeather.Models
@@ -18,7 +16,7 @@ namespace OpenWeather.Models
 
         public void AddRange(IEnumerable<Forecast> data)
         {
-            foreach(var datum in data)
+            foreach (var datum in data)
             {
                 ForecastData.Add(datum);
             }
@@ -30,7 +28,7 @@ namespace OpenWeather.Models
             builder.Append(Location);
             builder.AppendLine(":");
 
-            foreach(var datum in ForecastData)
+            foreach (var datum in ForecastData)
             {
                 builder.Append(datum.MeasureTime.ToLocalTime().ToString());
                 builder.Append(": ");

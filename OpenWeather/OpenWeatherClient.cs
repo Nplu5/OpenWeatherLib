@@ -1,9 +1,9 @@
-﻿using OpenWeather.Helper;
-using OpenWeather.Interfaces;
-using OpenWeather.Models;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using OpenWeather.Helper;
+using OpenWeather.Interfaces;
+using OpenWeather.Models;
 
 namespace OpenWeather
 {
@@ -11,7 +11,7 @@ namespace OpenWeather
     {
         internal OpenWeatherClient(HttpMessageHandler handler) : base(handler) { }
 
-        internal OpenWeatherClient() : base () { }
+        internal OpenWeatherClient() : base() { }
 
         async Task<Maybe<ForecastResponse>> IClient.GetForecastAsync(string url)
         {

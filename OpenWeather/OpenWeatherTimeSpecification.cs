@@ -9,7 +9,7 @@ namespace OpenWeather
     {
         private const string _TimeSpanOutOfRangeExceptionMessage = "The provided timespan must not exceed a total amount of 24 hours. Use relativeDay Argument to achieve this behvaiour.";
         private const double _TimeIncludeRange = 1.5;
-        private TimeZoneInfo _EuropeanTimeZone = TimeZoneInfo.GetSystemTimeZones()
+        public static TimeZoneInfo _TimeZone { get; set; } = TimeZoneInfo.GetSystemTimeZones()
             .Where(zone => zone.Id.Contains("W. Europe Standard"))
             .Single();
 
@@ -17,8 +17,8 @@ namespace OpenWeather
         {
             if (element is Forecast forecast)
             {
-                var timeDifference = (ComparisonDateTime - TimeZoneInfo.ConvertTimeFromUtc(forecast.MeasureTime, _EuropeanTimeZone)).TotalHours;
-                return (timeDifference <= 1.5 && timeDifference > -1.5);
+                var timeDifference = (ComparisonDateTime - TimeZoneInfo.ConvertTimeFromUtc(forecast.MeasureTime, _TimeZone)).TotalHours;
+                return (timeDifference <= _TimeIncludeRange && timeDifference > ((-1) * _TimeIncludeRange));
             }
             return false;
         }
@@ -29,12 +29,14 @@ namespace OpenWeather
         {
             ValidateTimeSpan(timeSpan);
 
-            ComparisonDateTime = new DateTime(referenceDateTime.Year,
+            ComparisonDateTime = new DateTime(
+                referenceDateTime.Year,
                 referenceDateTime.Month,
                 referenceDateTime.Day,
                 timeSpan.Hours,
                 timeSpan.Minutes,
-                timeSpan.Seconds).AddDays((double)relativeDay);            
+                timeSpan.Seconds)
+                .AddDays((double)relativeDay);
         }
 
         private void ValidateTimeSpan(TimeSpan timeSpan)

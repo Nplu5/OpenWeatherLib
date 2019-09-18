@@ -1,6 +1,6 @@
 ﻿using System;
-using OpenWeather.Interfaces;
 using System.Runtime.CompilerServices;
+using OpenWeather.Interfaces;
 
 [assembly: InternalsVisibleTo("OpenWeather.Tests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
@@ -17,7 +17,7 @@ namespace OpenWeather
             _builder = new UriBuilder(BaseUrl);
             AppendQuery(string.Concat("APPID=", ApiKey));
         }
-        
+
         string IUrlProvider.GetUriAsString()
         {
             return ((IUrlProvider)this).GetUri().AbsoluteUri;
@@ -75,7 +75,7 @@ namespace OpenWeather
                     queryParameter = "metric";
                     break;
                 case QueryUnit.Kelvin:
-                    return this; 
+                    return this;
             }
             AppendQuery(string.Concat(queryIdentifier, queryParameter));
             return this;

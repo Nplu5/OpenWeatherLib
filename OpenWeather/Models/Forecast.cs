@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace OpenWeather.Models
 {
@@ -18,7 +18,7 @@ namespace OpenWeather.Models
 
         [JsonProperty("wind")]
         public WindCondition Wind { get; set; }
-        
+
         [JsonProperty("rain", NullValueHandling = NullValueHandling.Ignore)]
         public RainCondition Rain { get; set; }
 

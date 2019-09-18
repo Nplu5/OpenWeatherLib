@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Xunit;
 using Moq;
+using Moq.Language;
 using OpenWeather.Interfaces;
 using OpenWeather.Models;
+using Xunit;
 using static OpenWeather.OpenWeatherUrlProvider;
-using Moq.Language;
 
 namespace OpenWeather.Tests
 {
@@ -55,12 +55,13 @@ namespace OpenWeather.Tests
 
             var setup = client.SetupSequence(cli => cli.GetForecastAsync(It.IsAny<string>()));
             ISetupSequentialResult<Task<Helper.Maybe<ForecastResponse>>> flow = null;
-            foreach(var response in responses)
+            foreach (var response in responses)
             {
                 if (flow is null)
                 {
                     flow = setup.Returns(() => Task.FromResult(response));
-                } else
+                }
+                else
                 {
                     flow = flow.Returns(() => Task.FromResult(response));
                 }
@@ -240,7 +241,7 @@ namespace OpenWeather.Tests
             });
             var mockQuery = CreateQuery(new List<string>() { firstLocation, secondLocation });
             mockQuery.Setup(query => query.IsSatisfiedBy(It.IsAny<Forecast>()))
-                .Returns((Forecast forecast) =>forecast.MeasureTime.Equals(new DateTime(2019, 7, 30, 21, 0, 0)));
+                .Returns((Forecast forecast) => forecast.MeasureTime.Equals(new DateTime(2019, 7, 30, 21, 0, 0)));
 
             var serviceUnderTest = new OpenWeatherService(client.Object, urlBuilder.Object);
 
