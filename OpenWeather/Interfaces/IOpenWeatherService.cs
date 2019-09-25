@@ -8,6 +8,6 @@ namespace OpenWeather.Interfaces
 {
     public interface IOpenWeatherService
     {
-        Task<IEnumerable<ForecastResult>> GetForecasts(IQuery<string, Forecast> currentQuery);
+        Task<IEnumerable<IForecastResult>> GetForecasts(IQuery<string, Forecast> currentQuery);
     }
 }

@@ -24,7 +24,7 @@ namespace OpenWeather
             CreateDefaultUrlProvider();
         }
 
-        public async Task<IEnumerable<ForecastResult>> GetForecasts(IQuery<string, Forecast> currentQuery)
+        public async Task<IEnumerable<IForecastResult>> GetForecasts(IQuery<string, Forecast> currentQuery)
         {
             var tasksToExecute = currentQuery.Queries.Select(queryLocation => UrlProvider.SetLocation(queryLocation).GetUriAsString())
                 .Select(urlToCall => Client.GetForecastAsync(urlToCall));

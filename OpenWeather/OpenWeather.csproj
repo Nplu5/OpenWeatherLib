@@ -5,7 +5,7 @@
     <PackageId>Nplus.OpenWeatherApi</PackageId>
     <Description>A library to interact with the OpenWeather API</Description>
     <IsPackable>true</IsPackable>
-    <Version>0.4.1</Version>
+    <Version>0.4.2</Version>
     <Authors>Simon Krause</Authors>
     <RepositoryUrl>https://github.com/Nplu5/OpenWeatherLib</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>

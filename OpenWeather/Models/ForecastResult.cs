@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using OpenWeather.Interfaces;
 
 namespace OpenWeather.Models
 {
-    public class ForecastResult
+    public class ForecastResult : IForecastResult
     {
         public string Location { get; }
         public IList<Forecast> ForecastData { get; }
 
-        public ForecastResult(string location)
+        internal ForecastResult(string location)
         {
             Location = location;
             ForecastData = new List<Forecast>();
         }
 
-        public void AddRange(IEnumerable<Forecast> data)
+        internal void AddRange(IEnumerable<Forecast> data)
         {
             foreach (var datum in data)
             {
