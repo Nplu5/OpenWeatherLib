@@ -2,6 +2,7 @@
 using System.Linq;
 using OpenWeather.Interfaces;
 using OpenWeather.Models;
+using OpenWeather.Utils;
 
 namespace OpenWeather
 {
@@ -9,15 +10,12 @@ namespace OpenWeather
     {
         private const string _TimeSpanOutOfRangeExceptionMessage = "The provided timespan must not exceed a total amount of 24 hours. Use relativeDay Argument to achieve this behvaiour.";
         private const double _TimeIncludeRange = 1.5;
-        public static TimeZoneInfo _TimeZone { get; set; } = TimeZoneInfo.GetSystemTimeZones()
-            .Where(zone => zone.Id.Contains("W. Europe Standard"))
-            .Single();
 
         public bool IsSatisfiedBy(Forecast element)
         {
             if (element is Forecast forecast)
             {
-                var timeDifference = (ComparisonDateTime - TimeZoneInfo.ConvertTimeFromUtc(forecast.MeasureTime, _TimeZone)).TotalHours;
+                var timeDifference = (ComparisonDateTime - TimeZoneInfo.ConvertTimeFromUtc(forecast.MeasureTime, TimeZoneProvider.TimeZone)).TotalHours;
                 return (timeDifference <= _TimeIncludeRange && timeDifference > ((-1) * _TimeIncludeRange));
             }
             return false;

@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OpenWeather.Interfaces;
 using OpenWeather.Models;
+using OpenWeather.Utils;
 
 namespace OpenWeather
 {
@@ -48,6 +50,11 @@ namespace OpenWeather
             UrlProvider.SetLanguage(OpenWeatherUrlProvider.QueryLanguage.German)
                 .SetMode(OpenWeatherUrlProvider.QueryMode.Json)
                 .SetUnit(OpenWeatherUrlProvider.QueryUnit.Metric);
+        }
+
+        public void SetTimeZoneInfo(TimeZoneInfo timeZoneInfo)
+        {
+            TimeZoneProvider.TimeZone = timeZoneInfo;
         }
     }
 }

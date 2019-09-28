@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using OpenWeather.Interfaces;
+using OpenWeather.Utils;
 
 namespace OpenWeather.Models
 {
@@ -31,13 +33,12 @@ namespace OpenWeather.Models
 
             foreach (var datum in ForecastData)
             {
-                builder.Append(datum.MeasureTime.ToLocalTime().ToString());
+                builder.Append(TimeZoneInfo.ConvertTimeFromUtc(datum.MeasureTime, TimeZoneProvider.TimeZone).ToString());
                 builder.Append(": ");
                 builder.Append($"{datum.Data.Temperature}");
                 builder.AppendLine("°C");
                 builder.AppendLine("------------------------");
             }
-
 
             return builder.ToString();
         }

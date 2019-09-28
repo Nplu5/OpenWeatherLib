@@ -6,6 +6,7 @@ using Moq;
 using Moq.Language;
 using OpenWeather.Interfaces;
 using OpenWeather.Models;
+using OpenWeather.Utils;
 using Xunit;
 using static OpenWeather.OpenWeatherUrlProvider;
 
@@ -248,6 +249,18 @@ namespace OpenWeather.Tests
             var result = await serviceUnderTest.GetForecasts(mockQuery.Object);
 
             Assert.True(result.Count() == 2);
+        }
+
+        [Fact]
+        public void SetTimeZoneInfoForUseInLibrary()
+        {
+            var expectedTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Azores Standard Time");
+            var urlBuilder = CreateFluentUrlProvider();
+            var client = CreateClient();
+            var serviceUnderTest = (IOpenWeatherService)new OpenWeatherService(client.Object, urlBuilder.Object);
+            serviceUnderTest.SetTimeZoneInfo(expectedTimeZone);
+
+            Assert.Equal(expectedTimeZone, TimeZoneProvider.TimeZone);
         }
     }
 }

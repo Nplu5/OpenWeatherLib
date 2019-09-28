@@ -9,5 +9,7 @@ namespace OpenWeather.Interfaces
     public interface IOpenWeatherService
     {
         Task<IEnumerable<IForecastResult>> GetForecasts(IQuery<string, Forecast> currentQuery);
+
+        void SetTimeZoneInfo(TimeZoneInfo timeZoneInfo);
     }
 }

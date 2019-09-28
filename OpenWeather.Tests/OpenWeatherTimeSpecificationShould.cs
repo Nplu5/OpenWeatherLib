@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenWeather.Models;
+using OpenWeather.Utils;
 using Xunit;
 
 namespace OpenWeather.Tests
@@ -126,6 +127,22 @@ namespace OpenWeather.Tests
             var SpecificationUnderTest = new OpenWeatherTimeSpecification(relativeDay, timeSpan, referenceDateTime);
 
             Assert.False(SpecificationUnderTest.IsSatisfiedBy(null));
+        }
+
+        [Fact]
+        public void UseTimeZoneInfoFromTimeProviderDuringComparison()
+        {
+            // Azerbaijan Standard Time UTC+4
+            var relativeDay = RelativeDay.NextDay;
+            var timeSpan = new TimeSpan(1,0,0);  // will be interpreted as time already shifted to timezone
+            var referenceDateTime = new DateTime(2019, 07, 30, 18, 30, 34);
+            var desiredTimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Azerbaijan Standard Time");
+
+            var testForecast = GetTestForecast();
+            TimeZoneProvider.TimeZone = desiredTimeZoneInfo;
+            var SpecificationUnderTest = new OpenWeatherTimeSpecification(relativeDay, timeSpan, referenceDateTime);
+
+            Assert.True(SpecificationUnderTest.IsSatisfiedBy(testForecast));
         }
     }
 }
