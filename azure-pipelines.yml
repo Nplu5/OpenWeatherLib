@@ -57,15 +57,15 @@ steps:
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
 - task: DotNetCoreCLI@2
-  displayName: Publish function app as Zip
+  displayName: Publish library as Zip
   inputs:
     command: publish
     publishWebProjects: false
     projects: '$(libraryProject)'
     arguments: '--configuration $(buildConfiguration) --output $(build.artifactstagingdirectory)'
-    zipAfterPublish: True
+    zipAfterPublish: false
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact to Pipeline'
+  displayName: 'Publish Artifact to Pipeline drop'
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
 
