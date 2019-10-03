@@ -28,15 +28,7 @@ namespace OpenWeather
 
             CreateDefaultUrlProvider();
         }
-
-        ~OpenWeatherService()
-        {
-            if (Client is OpenWeatherClient _client)
-            {
-                _client.Dispose();
-            }
-        }
-
+        
         public async Task<IEnumerable<IForecastResult>> GetForecasts(IQuery<string, Forecast> currentQuery)
         {
             if (currentQuery == null)

@@ -19,7 +19,7 @@ namespace OpenWeather
             return false;
         }
 
-        public DateTime ComparisonDateTime { get; private set; }
+        internal DateTime ComparisonDateTime { get; private set; }
 
         public OpenWeatherTimeSpecification(RelativeDay relativeDay, TimeSpan timeSpan, DateTime referenceDateTime)
         {

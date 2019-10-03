@@ -10,25 +10,26 @@ namespace OpenWeather.Models
     {
         [JsonProperty("dt")]
         [JsonConverter(typeof(MicrosecondEpochConverter))]
-        public DateTime MeasureTime { get; set; }
+        public DateTime MeasureTime { get; internal set; }
         [JsonProperty("main")]
-        public WeatherData Data { get; set; }
+        public WeatherData Data { get; internal set; }
 
         [JsonProperty("weather")]
-        public List<WeatherCondition> WeatherConditions { get; }
+        public List<WeatherCondition> WeatherConditions { get; internal set; }
 
         [JsonProperty("wind")]
-        public WindCondition Wind { get; set; }
+        public WindCondition Wind { get; internal set; }
 
         [JsonProperty("rain", NullValueHandling = NullValueHandling.Ignore)]
-        public RainCondition Rain { get; set; }
+        public RainCondition Rain { get; internal set; }
 
         [JsonProperty("dt_txt")]
-        public DateTimeOffset CalculationTime { get; set; }
+        public DateTimeOffset CalculationTime { get; internal set; }
 
+        internal Forecast() { }
     }
 
-    public class MicrosecondEpochConverter : DateTimeConverterBase
+    internal class MicrosecondEpochConverter : DateTimeConverterBase
     {
         private static readonly DateTime _epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
