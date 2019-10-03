@@ -13,7 +13,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		azure-pipelines.yml = azure-pipelines.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleOpenWeatherLib", "ConsoleOpenWeatherLib\ConsoleOpenWeatherLib.csproj", "{37796793-6388-441B-949D-84EFB6DACEA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleOpenWeatherLib", "ConsoleOpenWeatherLib\ConsoleOpenWeatherLib.csproj", "{37796793-6388-441B-949D-84EFB6DACEA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github Templates", "Github Templates", "{908AAE7D-E84C-408A-9B90-6F04D699DFD9}"
+	ProjectSection(SolutionItems) = preProject
+		.github\ISSUE_TEMPLATE\bug_report.md = .github\ISSUE_TEMPLATE\bug_report.md
+		.github\ISSUE_TEMPLATE\feature_request.md = .github\ISSUE_TEMPLATE\feature_request.md
+		.github\PULL_REQUEST_TEMPLATE\pull_request.md = .github\PULL_REQUEST_TEMPLATE\pull_request.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +43,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{908AAE7D-E84C-408A-9B90-6F04D699DFD9} = {44446AB6-5F2E-40EB-83C3-E01CEB690EBF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2EDC6696-103B-403C-B935-909706AA5079}
