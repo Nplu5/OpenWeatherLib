@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using OpenWeather.Interfaces;
+using OpenWeather.Utils;
 
 [assembly: InternalsVisibleTo("OpenWeather.Tests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
@@ -32,7 +33,7 @@ namespace OpenWeather
         {
             if (Location.Split(',').Length <= 1
                 || Location.Split(',')[1].Length != 2)
-                throw new ArgumentException("The location must be of the format of: {town},{countrycode}");
+                throw new ArgumentException(ErrorMessages.LocationFormatError);
 
             if (_builder.Query.Contains(LocationQueryParameterIdentifier))
             {
@@ -117,9 +118,9 @@ namespace OpenWeather
         }
         private void ReplaceLocationInQuery(string Location)
         {
-            var startIndex = _builder.Query.IndexOf("q=");
+            var startIndex = _builder.Query.IndexOf("q=", StringComparison.CurrentCultureIgnoreCase);
             var endIndex = _builder.Query.IndexOf('&', startIndex);
-            string subString = string.Empty;
+            string subString;
             if (endIndex == -1)
             {
                 subString = _builder.Query.Substring(startIndex + 2);

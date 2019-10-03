@@ -17,12 +17,12 @@ namespace OpenWeather
         {
             try
             {
-                var response = await base.GetAsync(url);
+                var response = await base.GetAsync(url).ConfigureAwait(false);
 
                 if (response.StatusCode != System.Net.HttpStatusCode.OK)
                     return new Maybe<ForecastResponse>();
 
-                var deserializedResponse = ForecastResponse.FromJson(await response.Content.ReadAsStringAsync());
+                var deserializedResponse = ForecastResponse.FromJson(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
                 return new Maybe<ForecastResponse>(deserializedResponse);
             }
             catch (HttpRequestException ex)

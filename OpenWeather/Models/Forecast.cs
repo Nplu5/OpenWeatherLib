@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -9,36 +10,45 @@ namespace OpenWeather.Models
     {
         [JsonProperty("dt")]
         [JsonConverter(typeof(MicrosecondEpochConverter))]
-        public DateTime MeasureTime { get; set; }
+        public DateTime MeasureTime { get; internal set; }
         [JsonProperty("main")]
-        public WeatherData Data { get; set; }
+        public WeatherData Data { get; internal set; }
 
         [JsonProperty("weather")]
-        public List<WeatherCondition> WeatherConditions { get; set; }
+        public List<WeatherCondition> WeatherConditions { get; internal set; }
 
         [JsonProperty("wind")]
-        public WindCondition Wind { get; set; }
+        public WindCondition Wind { get; internal set; }
 
         [JsonProperty("rain", NullValueHandling = NullValueHandling.Ignore)]
-        public RainCondition Rain { get; set; }
+        public RainCondition Rain { get; internal set; }
 
         [JsonProperty("dt_txt")]
-        public DateTimeOffset CalculationTime { get; set; }
+        public DateTimeOffset CalculationTime { get; internal set; }
 
+        internal Forecast() { }
     }
 
-    public class MicrosecondEpochConverter : DateTimeConverterBase
+    internal class MicrosecondEpochConverter : DateTimeConverterBase
     {
         private static readonly DateTime _epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteRawValue(((DateTime)value - _epoch).TotalSeconds.ToString());
+            if (writer == null)
+                return;
+
+            writer.WriteRawValue(((DateTime)value - _epoch).TotalSeconds.ToString(CultureInfo.InvariantCulture));
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if (reader.Value == null) { return null; }
+            if (reader == null)
+                return null;
+
+            if (reader.Value == null)
+                return null;
+
             return _epoch.AddSeconds((long)reader.Value);
         }
     }

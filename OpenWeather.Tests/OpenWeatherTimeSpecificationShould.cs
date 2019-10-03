@@ -134,7 +134,7 @@ namespace OpenWeather.Tests
         {
             // Azerbaijan Standard Time UTC+4
             var relativeDay = RelativeDay.NextDay;
-            var timeSpan = new TimeSpan(1,0,0);  // will be interpreted as time already shifted to timezone
+            var timeSpan = new TimeSpan(1, 0, 0);  // will be interpreted as time already shifted to timezone
             var referenceDateTime = new DateTime(2019, 07, 30, 18, 30, 34);
             var desiredTimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Azerbaijan Standard Time");
 

@@ -9,7 +9,7 @@ namespace ConsoleOpenWeatherLib
     {
         static async Task Main(string[] args)
         {
-            var openWeatherService = OpenWeatherService.CreateOpenWeatherService("c9f817379c6fed669c718214bae83ab8");
+            var openWeatherService = OpenWeatherService.CreateOpenWeatherService("SECRET");
             var query = new OpenWeatherQuery(
                 new List<string>()
                 {
@@ -22,7 +22,7 @@ namespace ConsoleOpenWeatherLib
                     new OpenWeatherTimeSpecification(RelativeDay.NextDay, new TimeSpan(16,30,0), DateTime.Today)
                 }
             );
-            var matches = await openWeatherService.GetForecasts(query);
+            var matches = await openWeatherService.GetForecasts(query).ConfigureAwait(false);
 
             foreach (var match in matches)
             {

@@ -12,12 +12,12 @@ namespace OpenWeather.Helper
 
         internal Maybe()
         {
-            _values = new T[0];
+            _values = new List<T>();
         }
 
         internal Maybe(T value)
         {
-            _values = new T[] { value };
+            _values = new List<T>() { value };
             ErrorMessage = string.Empty;
         }
 

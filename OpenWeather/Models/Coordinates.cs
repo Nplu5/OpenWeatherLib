@@ -2,12 +2,12 @@
 
 namespace OpenWeather.Models
 {
-    public partial class Coordinates
+    internal partial class Coordinates
     {
         [JsonProperty("lat")]
-        public double Latitude { get; set; }
+        internal double Latitude { get; set; }
 
         [JsonProperty("lon")]
-        public double Longitude { get; set; }
+        internal double Longitude { get; set; }
     }
 }

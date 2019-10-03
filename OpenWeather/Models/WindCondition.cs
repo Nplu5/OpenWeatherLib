@@ -5,9 +5,11 @@ namespace OpenWeather.Models
     public partial class WindCondition
     {
         [JsonProperty("speed")]
-        public double Speed { get; set; }
+        public double Speed { get; internal set; }
 
         [JsonProperty("deg")]
-        public double Deg { get; set; }
+        public double Deg { get; internal set; }
+
+        internal WindCondition() { }
     }
 }

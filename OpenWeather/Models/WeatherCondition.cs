@@ -5,13 +5,14 @@ namespace OpenWeather.Models
     public partial class WeatherCondition
     {
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public long Id { get; internal set; }
 
         [JsonProperty("main")]
-        public string Category { get; set; }
+        public string Category { get; internal set; }
 
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public string Description { get; internal set; }
 
+        internal WeatherCondition() { }
     }
 }
