@@ -1,1 +1,59 @@
-﻿
+﻿OpenWeather.Interfaces.IForecastResult
+OpenWeather.Interfaces.IForecastResult.ForecastData.get -> System.Collections.Generic.IList<OpenWeather.Models.Forecast>
+OpenWeather.Interfaces.IForecastResult.Location.get -> string
+OpenWeather.Interfaces.IForecastResult.ToString() -> string
+OpenWeather.Interfaces.IOpenWeatherService
+OpenWeather.Interfaces.IOpenWeatherService.GetForecasts(OpenWeather.Interfaces.IQuery<string, OpenWeather.Models.Forecast> currentQuery) -> System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<OpenWeather.Interfaces.IForecastResult>>
+OpenWeather.Interfaces.IOpenWeatherService.SetTimeZoneInfo(System.TimeZoneInfo timeZoneInfo) -> void
+OpenWeather.Interfaces.IQuery<T1, T2>
+OpenWeather.Interfaces.IQuery<T1, T2>.Queries.get -> System.Collections.Generic.IEnumerable<T1>
+OpenWeather.Interfaces.IQuery<T1, T2>.Specifications.get -> System.Collections.Generic.IEnumerable<OpenWeather.Interfaces.ISpecification<T2>>
+OpenWeather.Interfaces.ISpecification<T>
+OpenWeather.Interfaces.ISpecification<T>.IsSatisfiedBy(T element) -> bool
+OpenWeather.Models.Forecast
+OpenWeather.Models.Forecast.CalculationTime.get -> System.DateTimeOffset
+OpenWeather.Models.Forecast.Data.get -> OpenWeather.Models.WeatherData
+OpenWeather.Models.Forecast.MeasureTime.get -> System.DateTime
+OpenWeather.Models.Forecast.Rain.get -> OpenWeather.Models.RainCondition
+OpenWeather.Models.Forecast.WeatherConditions.get -> System.Collections.Generic.List<OpenWeather.Models.WeatherCondition>
+OpenWeather.Models.Forecast.Wind.get -> OpenWeather.Models.WindCondition
+OpenWeather.Models.ForecastResult
+OpenWeather.Models.ForecastResult.ForecastData.get -> System.Collections.Generic.IList<OpenWeather.Models.Forecast>
+OpenWeather.Models.ForecastResult.Location.get -> string
+OpenWeather.Models.RainCondition
+OpenWeather.Models.RainCondition.ThreeHourProbability.get -> double
+OpenWeather.Models.WeatherCondition
+OpenWeather.Models.WeatherCondition.Category.get -> string
+OpenWeather.Models.WeatherCondition.Description.get -> string
+OpenWeather.Models.WeatherCondition.Id.get -> long
+OpenWeather.Models.WeatherData
+OpenWeather.Models.WeatherData.GroundLevel.get -> double
+OpenWeather.Models.WeatherData.Humidity.get -> long
+OpenWeather.Models.WeatherData.MaximumTemperature.get -> double
+OpenWeather.Models.WeatherData.MinimumTemperature.get -> double
+OpenWeather.Models.WeatherData.Pressure.get -> double
+OpenWeather.Models.WeatherData.SeaLevel.get -> double
+OpenWeather.Models.WeatherData.Temperature.get -> double
+OpenWeather.Models.WindCondition
+OpenWeather.Models.WindCondition.Deg.get -> double
+OpenWeather.Models.WindCondition.Speed.get -> double
+OpenWeather.OpenWeatherQuery
+OpenWeather.OpenWeatherQuery.IsSatisfiedBy(OpenWeather.Models.Forecast element) -> bool
+OpenWeather.OpenWeatherQuery.OpenWeatherQuery(System.Collections.Generic.IEnumerable<string> locations, OpenWeather.Interfaces.ISpecification<OpenWeather.Models.Forecast> spec) -> void
+OpenWeather.OpenWeatherQuery.OpenWeatherQuery(System.Collections.Generic.IEnumerable<string> locations, System.Collections.Generic.IEnumerable<OpenWeather.Interfaces.ISpecification<OpenWeather.Models.Forecast>> specs) -> void
+OpenWeather.OpenWeatherQuery.OpenWeatherQuery(string location, OpenWeather.Interfaces.ISpecification<OpenWeather.Models.Forecast> spec) -> void
+OpenWeather.OpenWeatherQuery.OpenWeatherQuery(string location, System.Collections.Generic.IEnumerable<OpenWeather.Interfaces.ISpecification<OpenWeather.Models.Forecast>> specs) -> void
+OpenWeather.OpenWeatherQuery.Queries.get -> System.Collections.Generic.IEnumerable<string>
+OpenWeather.OpenWeatherQuery.Specifications.get -> System.Collections.Generic.IEnumerable<OpenWeather.Interfaces.ISpecification<OpenWeather.Models.Forecast>>
+OpenWeather.OpenWeatherService
+OpenWeather.OpenWeatherService.GetForecasts(OpenWeather.Interfaces.IQuery<string, OpenWeather.Models.Forecast> currentQuery) -> System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<OpenWeather.Interfaces.IForecastResult>>
+OpenWeather.OpenWeatherService.SetTimeZoneInfo(System.TimeZoneInfo timeZoneInfo) -> void
+OpenWeather.OpenWeatherTimeSpecification
+OpenWeather.OpenWeatherTimeSpecification.IsSatisfiedBy(OpenWeather.Models.Forecast element) -> bool
+OpenWeather.OpenWeatherTimeSpecification.OpenWeatherTimeSpecification(OpenWeather.RelativeDay relativeDay, System.TimeSpan timeSpan, System.DateTime referenceDateTime) -> void
+OpenWeather.RelativeDay
+OpenWeather.RelativeDay.DayAfterNextDay = 2 -> OpenWeather.RelativeDay
+OpenWeather.RelativeDay.NextDay = 1 -> OpenWeather.RelativeDay
+OpenWeather.RelativeDay.Today = 0 -> OpenWeather.RelativeDay
+override OpenWeather.Models.ForecastResult.ToString() -> string
+static OpenWeather.OpenWeatherService.CreateOpenWeatherService(string ApiKey) -> OpenWeather.Interfaces.IOpenWeatherService
