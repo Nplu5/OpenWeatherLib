@@ -18,7 +18,7 @@ namespace OpenWeather
                                           new OpenWeatherUrlProvider("http://api.openweathermap.org/data/2.5/forecast", ApiKey));
         }
 
-        internal OpenWeatherService(IClient client, IUrlProvider provider)
+        internal OpenWeatherService(IClient? client, IUrlProvider provider)
         {
             if (client == null)
                 client = new OpenWeatherClient();

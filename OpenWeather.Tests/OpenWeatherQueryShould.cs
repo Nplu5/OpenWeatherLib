@@ -65,8 +65,10 @@ namespace OpenWeather.Tests
         public void TakeOneLocationAndEnumerableAndCheckForItemsNull()
         {
             string location = "Karlsrueh";
-            List<ISpecification<Forecast>> specs = new List<ISpecification<Forecast>>();
-            specs.Add(null);
+            List<ISpecification<Forecast>> specs = new List<ISpecification<Forecast>>
+            {
+                null
+            };
 
             Assert.Throws<ArgumentNullException>(() => new OpenWeatherQuery(location, specs));
         }
@@ -126,8 +128,10 @@ namespace OpenWeather.Tests
         public void TakeEnumerableLocationsAndCheckForNullEnumerable()
         {
             List<string> locations = null;
-            List<ISpecification<Forecast>> specs = new List<ISpecification<Forecast>>();
-            specs.Add(CreateSpecification(false));
+            List<ISpecification<Forecast>> specs = new List<ISpecification<Forecast>>
+            {
+                CreateSpecification(false)
+            };
 
             Assert.Throws<ArgumentNullException>(() => new OpenWeatherQuery(locations, specs));
         }
@@ -136,8 +140,10 @@ namespace OpenWeather.Tests
         public void TakeEnumerableLocationsAndCheckForEmptyEnumerable()
         {
             List<string> locations = new List<string>();
-            List<ISpecification<Forecast>> specs = new List<ISpecification<Forecast>>();
-            specs.Add(CreateSpecification(false));
+            List<ISpecification<Forecast>> specs = new List<ISpecification<Forecast>>
+            {
+                CreateSpecification(false)
+            };
 
             Assert.Throws<ArgumentException>(() => new OpenWeatherQuery(locations, specs));
         }
@@ -146,8 +152,10 @@ namespace OpenWeather.Tests
         public void TakeEnumerableLocationsAndCheckForNullElements()
         {
             List<string> locations = new List<string>() { null, "Karlsruhe" };
-            List<ISpecification<Forecast>> specs = new List<ISpecification<Forecast>>();
-            specs.Add(CreateSpecification(false));
+            List<ISpecification<Forecast>> specs = new List<ISpecification<Forecast>>
+            {
+                CreateSpecification(false)
+            };
 
             Assert.Throws<ArgumentNullException>(() => new OpenWeatherQuery(locations, specs));
         }
@@ -156,8 +164,10 @@ namespace OpenWeather.Tests
         public void TakeEnumerableLocationsAndCheckForEmptylElements()
         {
             List<string> locations = new List<string>() { string.Empty, "Karlsruhe" };
-            List<ISpecification<Forecast>> specs = new List<ISpecification<Forecast>>();
-            specs.Add(CreateSpecification(false));
+            List<ISpecification<Forecast>> specs = new List<ISpecification<Forecast>>
+            {
+                CreateSpecification(false)
+            };
 
             Assert.Throws<ArgumentException>(() => new OpenWeatherQuery(locations, specs));
         }

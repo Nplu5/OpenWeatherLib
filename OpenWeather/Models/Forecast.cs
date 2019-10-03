@@ -26,7 +26,9 @@ namespace OpenWeather.Models
         [JsonProperty("dt_txt")]
         public DateTimeOffset CalculationTime { get; internal set; }
 
+#pragma warning disable CS8618 // Non-nullable field is uninitialized.
         internal Forecast() { }
+#pragma warning restore CS8618 // Non-nullable field is uninitialized.
     }
 
     internal class MicrosecondEpochConverter : DateTimeConverterBase
@@ -41,7 +43,7 @@ namespace OpenWeather.Models
             writer.WriteRawValue(((DateTime)value - _epoch).TotalSeconds.ToString(CultureInfo.InvariantCulture));
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader == null)
                 return null;

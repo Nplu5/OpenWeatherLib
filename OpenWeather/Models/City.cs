@@ -22,5 +22,8 @@ namespace OpenWeather.Models
         [JsonProperty("timezone")]
         internal long Timezone { get; set; }
 
+#pragma warning disable CS8618 // Non-nullable field is uninitialized.
+        internal City() { }
+#pragma warning restore CS8618 // Non-nullable field is uninitialized.
     }
 }

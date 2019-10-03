@@ -13,6 +13,8 @@ namespace OpenWeather.Models
         [JsonProperty("description")]
         public string Description { get; internal set; }
 
+#pragma warning disable CS8618 // Non-nullable field is uninitialized.
         internal WeatherCondition() { }
+#pragma warning restore CS8618 // Non-nullable field is uninitialized.
     }
 }

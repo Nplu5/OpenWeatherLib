@@ -15,6 +15,10 @@ namespace OpenWeather.Models
 
         [JsonProperty("city", Required = Required.Always)]
         internal City City { get; set; }
+
+#pragma warning disable CS8618 // Non-nullable field is uninitialized.
+        internal ForecastResponse() { }
+#pragma warning restore CS8618 // Non-nullable field is uninitialized.
     }
 
     internal partial class ForecastResponse
