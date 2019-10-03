@@ -59,7 +59,7 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'Pack NuGet pakcage for library'
   iputs:
-    command:pack
+    command: pack
     arguments: '--configuration $(buildConfiguration)'
     packagesToPack: '$(libraryProject)'
     nobuild: true
