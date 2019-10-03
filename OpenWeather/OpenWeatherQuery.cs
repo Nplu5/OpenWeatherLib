@@ -1,8 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenWeather.Interfaces;
 using OpenWeather.Models;
+using OpenWeather.Utils;
 
 namespace OpenWeather
 {
@@ -44,10 +45,10 @@ namespace OpenWeather
         private void ValidateEnumerableInput<T>(IEnumerable<T> enumerable, Action<T> validateElementAction)
         {
             if (enumerable is null)
-                throw new ArgumentNullException("Enumerable parameter must not be null");
+                throw new ArgumentNullException(ErrorMessages.ArgumentNullMessage(nameof(enumerable)));
 
-            if (enumerable.Count() == 0)
-                throw new ArgumentException("Enumerable must at least contain one element");
+            if (!enumerable.Any())
+                throw new ArgumentException(ErrorMessages.QueryMustContainAtLeastOneElementError);
 
             foreach (var item in enumerable)
                 validateElementAction(item);
@@ -56,16 +57,16 @@ namespace OpenWeather
         private static void ValidateSpec(ISpecification<Forecast> spec)
         {
             if (spec is null)
-                throw new ArgumentNullException("Spec paramter must not be null");
+                throw new ArgumentNullException(ErrorMessages.ArgumentNullMessage(nameof(spec)));
         }
 
         private static void ValidateLocation(string location)
         {
             if (location is null)
-                throw new ArgumentNullException("Location parameter must not be null");
+                throw new ArgumentNullException(ErrorMessages.ArgumentNullMessage(nameof(location)));
 
             if (string.IsNullOrEmpty(location))
-                throw new ArgumentException("Location paramter must not be empty");
+                throw new ArgumentException(ErrorMessages.LocationMustNotBeEmptyError);
         }
         #endregion
 
