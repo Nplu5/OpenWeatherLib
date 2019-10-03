@@ -56,13 +56,6 @@ steps:
     projects: '$(testProject)'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
-#- task: NuGetCommand@2
-#  inputs:
-#    command: 'pack'
-#    packagesToPack: '$(libraryProject)'
-#    configuration: '$(buildConfiguration)'
-#    versioningScheme: 'off'
-
 - task: DotNetCoreCLI@2
   displayName: 'Pack NuGet pakcage for library'
   inputs:
@@ -78,37 +71,3 @@ steps:
   inputs:
     targetPath: '$(Pipeline.Workspace)/Nuget'
     artifact: 'drop'
-
-#- task: NuGetCommand@2
-#  displayName: 'Pack NuGet package for library'
-#  inputs:
-#    command: 'pack'
-#    packagesToPack: '$(libraryProject)'
-#    packDestination: '$(build.artifactstagingdirectory)'
-
-#- task: DotNetCoreCLI@2
-#  displayName: Publish library as Zip
-#  inputs:
-#    command: publish
-#    publishWebProjects: false
-#    projects: '$(libraryProject)'
-#    arguments: '--configuration $(buildConfiguration) --output $(build.artifactstagingdirectory)'
-#    zipAfterPublish: false
-
-#- task: PublishBuildArtifacts@1
-#  displayName: 'Publish Artifact to Pipeline drop'
-#  inputs:
-#    PathtoPublish: '$(build.artifactstagingdirectory)'
-#    configuration: $(buildConfiguration)
-
-
-#- task: NuGetCommand@2
-#  displayName: 'Push Nuget to internal feed'
-#  inputs:
-#    command: 'push'
-#    feedsToUse: 'select'
-#    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-#    nuGetFeedType: 'internal'
-#    publishVstsFeed: 'OpenWeather.InternalFeed'
-#    versioningScheme: 'off'
-#    allowPackageConflicts: true
