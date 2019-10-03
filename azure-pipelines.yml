@@ -57,21 +57,25 @@ steps:
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
 - task: DotNetCoreCLI@2
-  displayName: Package library 
+  displayName: Publish function app as Zip
   inputs:
-    command: pack
-    arguments: '--configuration $(buildConfiguration)'
-    packagesToPack: '$(libraryProject)'
-    nobuild: true
-    versioningSCheme: 'off'
+    command: publish
+    publishWebProjects: false
+    projects: '$(libraryProject)'
+    arguments: '--configuration $(buildConfiguration) --output $(build.artifactstagingdirectory)'
+    zipAfterPublish: True
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact to Pipeline'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
 
-- task: NuGetCommand@2
-  displayName: 'Push Nuget to internal feed'
-  inputs:
-    command: 'push'
-    feedsToUse: 'select'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: 'OpenWeather.InternalFeed'
-    versioningScheme: 'off'
-    allowPackageConflicts: true
+#- task: NuGetCommand@2
+#  displayName: 'Push Nuget to internal feed'
+#  inputs:
+#    command: 'push'
+#    feedsToUse: 'select'
+#    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+#    nuGetFeedType: 'internal'
+#    publishVstsFeed: 'OpenWeather.InternalFeed'
+#    versioningScheme: 'off'
+#    allowPackageConflicts: true
