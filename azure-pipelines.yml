@@ -56,12 +56,22 @@ steps:
     projects: '$(testProject)'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
-- task: NuGetCommand@2
-  displayName: 'Pack NuGet package for library'
-  inputs:
-    command: 'pack'
+- task: DotNetCoreCLI@2
+  displayName: 'Pack NuGet pakcage for library'
+  iputs:
+    command:pack
+    arguments: '--configuration $(buildConfiguration)'
     packagesToPack: '$(libraryProject)'
-    packDestination: '$(build.artifactstagingdirectory)'
+    nobuild: true
+    versioningScheme: 'off'
+    packDirectory: '$(Build.ArtifactStagingDirectory)'
+
+#- task: NuGetCommand@2
+#  displayName: 'Pack NuGet package for library'
+#  inputs:
+#    command: 'pack'
+#    packagesToPack: '$(libraryProject)'
+#    packDestination: '$(build.artifactstagingdirectory)'
 
 #- task: DotNetCoreCLI@2
 #  displayName: Publish library as Zip
