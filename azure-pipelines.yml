@@ -56,18 +56,28 @@ steps:
     projects: '$(testProject)'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
-- task: DotNetCoreCLI@2
-  displayName: Publish library as Zip
+- task: NuGetCommand@2
+  displayName: 'Pack NuGet package for library'
   inputs:
-    command: publish
-    publishWebProjects: false
-    projects: '$(libraryProject)'
-    arguments: '--configuration $(buildConfiguration) --output $(build.artifactstagingdirectory)'
-    zipAfterPublish: false
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact to Pipeline drop'
-  inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
+    command: 'pack'
+    packagesToPack: '$(libraryProject)'
+    packDestination: '$(build.artifactstagingdirectory)'
+
+#- task: DotNetCoreCLI@2
+#  displayName: Publish library as Zip
+#  inputs:
+#    command: publish
+#    publishWebProjects: false
+#    projects: '$(libraryProject)'
+#    arguments: '--configuration $(buildConfiguration) --output $(build.artifactstagingdirectory)'
+#    zipAfterPublish: false
+
+#- task: PublishBuildArtifacts@1
+#  displayName: 'Publish Artifact to Pipeline drop'
+#  inputs:
+#    PathtoPublish: '$(build.artifactstagingdirectory)'
+#    configuration: $(buildConfiguration)
+
 
 #- task: NuGetCommand@2
 #  displayName: 'Push Nuget to internal feed'
