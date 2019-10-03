@@ -71,12 +71,12 @@ steps:
     packagesToPack: '$(libraryProject)'
     nobuild: true
     versioningScheme: 'off'
-    outputDir: '$(Pipeline.Workspace)'
+    outputDir: '$(Pipeline.Workspace)/Nuget'
 
 - task: PublishPipelineArtifact@1
   displayName: 'Pugblish Artifacts to pipeline artifacts'
   inputs:
-    targetPath: '$(Pipeline.Workspace)'
+    targetPath: '$(Pipeline.Workspace)/Nuget'
     artifact: 'drop'
 
 #- task: NuGetCommand@2
