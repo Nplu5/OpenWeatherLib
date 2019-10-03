@@ -8,11 +8,12 @@ namespace OpenWeather.Helper
     {
         private readonly IEnumerable<T> _values;
 
-        public string ErrorMessage { get; internal set; }
+        internal string ErrorMessage { get; set; }
 
         internal Maybe()
         {
             _values = new List<T>();
+            ErrorMessage = string.Empty;
         }
 
         internal Maybe(T value)
