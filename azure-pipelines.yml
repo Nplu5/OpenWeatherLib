@@ -57,21 +57,17 @@ steps:
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
 - task: DotNetCoreCLI@2
-  displayName: Package library 
+  displayName: 'Pack NuGet pakcage for library'
   inputs:
     command: pack
     arguments: '--configuration $(buildConfiguration)'
     packagesToPack: '$(libraryProject)'
     nobuild: true
-    versioningSCheme: 'off'
-
-- task: NuGetCommand@2
-  displayName: 'Push Nuget to internal feed'
-  inputs:
-    command: 'push'
-    feedsToUse: 'select'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: 'OpenWeather.InternalFeed'
     versioningScheme: 'off'
-    allowPackageConflicts: true
+    outputDir: '$(Pipeline.Workspace)/Nuget'
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Pugblish Artifacts to pipeline artifacts'
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/Nuget'
+    artifact: 'drop'
