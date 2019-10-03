@@ -64,7 +64,7 @@ steps:
     packagesToPack: '$(libraryProject)'
     nobuild: true
     versioningScheme: 'off'
-    packDirectory: '$(Build.ArtifactStagingDirectory)'
+    outputDir: '$(Build.ArtifactStagingDirectory)'
 
 #- task: NuGetCommand@2
 #  displayName: 'Pack NuGet package for library'
