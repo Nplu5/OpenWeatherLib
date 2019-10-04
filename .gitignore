@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /OpenWeather/APIKeysLocal.cs
+ConsoleOpenWeatherLib/Secrets.cs

@@ -9,7 +9,7 @@ namespace ConsoleOpenWeatherLib
     {
         static async Task Main(string[] args)
         {
-            var openWeatherService = OpenWeatherService.CreateOpenWeatherService("ENTER API KEY HERE");
+            var openWeatherService = OpenWeatherService.CreateOpenWeatherService(Secrets.OpenWeatherApiKey);
             var query = new OpenWeatherQuery(
                 "Karlsruhe,de",
                 new OpenWeatherDaySpecification(RelativeDay.NextDay,  DateTime.Today)                
