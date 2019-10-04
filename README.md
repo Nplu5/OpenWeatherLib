@@ -10,7 +10,7 @@ namespace ConsoleOpenWeatherLib
 {
     internal class Secrets
     {
-        internal static string OpenWeatherApiKey => "c0ef1de9b16207c5d7af3b282d6174c1";
+        internal static string OpenWeatherApiKey => "INSERT API KEY HERE";
     }
 }
 ```
