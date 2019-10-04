@@ -7,14 +7,14 @@ namespace OpenWeather
 {
     public class OpenWeatherTimeSpecification : ISpecification<Forecast>
     {
-        private const double _TimeIncludeRange = 1.5;
+        private const double TimeIncludeRange = 1.5;
 
         public bool IsSatisfiedBy(Forecast element)
         {
             if (element is Forecast forecast)
             {
                 var timeDifference = (ComparisonDateTime - TimeZoneInfo.ConvertTimeFromUtc(forecast.MeasureTime, TimeZoneProvider.TimeZone)).TotalHours;
-                return (timeDifference <= _TimeIncludeRange && timeDifference > ((-1) * _TimeIncludeRange));
+                return (timeDifference <= TimeIncludeRange && timeDifference > ((-1) * TimeIncludeRange));
             }
             return false;
         }
