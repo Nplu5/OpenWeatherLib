@@ -1,1 +1,3 @@
-﻿
+﻿OpenWeather.OpenWeatherDaySpecification
+OpenWeather.OpenWeatherDaySpecification.IsSatisfiedBy(OpenWeather.Models.Forecast element) -> bool
+OpenWeather.OpenWeatherDaySpecification.OpenWeatherDaySpecification(OpenWeather.RelativeDay day, System.DateTime reference) -> void
