@@ -54,6 +54,7 @@ namespace OpenWeather.Tests
         [Fact]
         public void ReturnTrueForSameDay()
         {
+            Utils.TimeZoneProvider.TimeZone = TimeZoneInfo.Utc;
             var relativeDay = RelativeDay.NextDay;
             var reference = new DateTime(2019, 07, 29);
             var testForecast = GetTestForecast(1);

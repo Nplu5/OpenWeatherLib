@@ -261,6 +261,7 @@ namespace OpenWeather.Tests
             serviceUnderTest.SetTimeZoneInfo(expectedTimeZone);
 
             Assert.Equal(expectedTimeZone, TimeZoneProvider.TimeZone);
+            serviceUnderTest.SetTimeZoneInfo(TimeZoneInfo.Utc);
         }
     }
 }
